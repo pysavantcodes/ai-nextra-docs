@@ -24,7 +24,7 @@ jobs:
           cp -R pages/* Odic-Ai/src/
           cd Odic-Ai
           git add .
-          git config user.name "pysavantcodes”
+          git config user.name "pysavantcodes"
           git config user.email "uwakblessing1@gmail.com"
           git commit -m "Sync pages"
           git push origin main
