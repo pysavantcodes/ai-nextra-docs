@@ -1,5 +1,6 @@
 name: Sync Pages to Odic-Ai Repository
-'on':
+GITHUB_TOKEN: ${{ secrets.TARGET_REPO_PAT }}
+"on":
   push:
     paths:
       - pages/**
