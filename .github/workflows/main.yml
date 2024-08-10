@@ -11,6 +11,8 @@ jobs:
       - name: Checkout Source Repository
         uses: actions/checkout@v2
       - name: Clone Target Repository
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: >
           git clone https://pysavantcodes:${{ secrets.API_TOKEN_GITHUB }}@github.com/pysavantcodes/Odic-Ai.git
 
