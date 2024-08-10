@@ -1,28 +1,10 @@
-name: Sync Pages to Odic-Ai Repository
-GITHUB_TOKEN: ${{ secrets.TARGET_REPO_PAT }}
-"on":
-  push:
-    paths:
-      - pages/**
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Source Repository
-        uses: actions/checkout@v2
-      - name: Clone Target Repository
-        run: >
-          git clone https://pysavantcodes:${{ secrets.TARGET_REPO_PAT }}@github.com/pysavantcodes/Odic-Ai.git
-
-          cd Odic-Ai
-
-          git checkout main
-      - name: Copy Files to Target Repository Folder
-        run: |
-          cp -R pages/* Odic-Ai/src/
-          cd void-tech
-          git add .
-          git config user.name "pysavantcodes”
-          git config user.email "uwakblessing1@gmail.com"
-          git commit -m "Sync pages"
-          git push origin dev
+- name: Push generated webpage to another repository
+  uses: nkoppel/push-files-to-another-repository@v1.1.3
+  env:
+    API_TOKEN_GITHUB: "${{ secrets.API_TOKEN_GITHUB }}"
+  with:
+    source-files: pages/
+    destination-username: pysavantcodes
+    destination-repository: https://github.com/pysavantcodes/Odic-Ai.git
+    destination-directory: src/
+    commit-email: uwakblessing1@gmail.com
