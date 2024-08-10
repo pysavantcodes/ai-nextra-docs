@@ -1,0 +1,27 @@
+name: Sync Pages to Odic-Ai Repository
+'on':
+  push:
+    paths:
+      - pages/**
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v2
+      - name: Clone Target Repository
+        run: >
+          git clone https://pysavantcodes:${{ secrets.TARGET_REPO_PAT }}@github.com/Odic-Ai.git
+
+          cd Odic-Ai
+
+          git checkout main
+      - name: Copy Files to Target Repository Folder
+        run: |
+          cp -R pages/* Odic-Ai/src/
+          cd void-tech
+          git add .
+          git config user.name "pysavantcodes”
+          git config user.email "uwakblessing1@gmail.com"
+          git commit -m "Sync pages"
+          git push origin dev
